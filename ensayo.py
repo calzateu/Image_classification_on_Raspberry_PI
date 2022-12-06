@@ -4,20 +4,19 @@ import tensorflow as tf
 from PIL import Image
 import numpy as np
 import time
-from picamera import PiCamera
 from time import sleep
 
 
 def load_labels(path): # Read the labels from the text file as a Python list.
     with open(path, 'r') as f:
         return [line.strip() for i, line in enumerate(f.readlines())]
-    
+
 def load_model(model_path):
     interpreter = tf.lite.Interpreter(model_path)
     #print("Model Loaded Successfully.")
-    
+
     interpreter.allocate_tensors()
-    
+
     return interpreter
 
 def preprocess(img):
@@ -25,7 +24,7 @@ def preprocess(img):
     image_resized = cv2.resize(image_rgb, (width, height))
     input_data = np.expand_dims(image_resized, axis=0)
     return input_data
-    
+
 def set_input_tensor(interpreter, image):
     tensor_index = interpreter.get_input_details()[0]['index']
     input_tensor = interpreter.tensor(tensor_index)()[0]
@@ -63,18 +62,17 @@ def show_result(img, text):
     thickness = 2
 
     # Using cv2.putText() method
-    img = cv2.putText(img, text, org, font,
+    cv2.putText(img, text, org, font,
                     fontScale, color, thickness, cv2.LINE_AA)
-    
+
     cv2.imshow("Image", img)
-    #sleep(6)
-    
+
 
 
 
 cap = cv2.VideoCapture(0)
 
-data_folder = "/home/pi/Desktop"
+data_folder = "Segunda_etapa/Modelos/VGG16"
 model_path = data_folder + "/model_VGG16_quant_f16.tflite"
 label_path = data_folder + "/labels.txt"
 
@@ -91,7 +89,7 @@ while True:
 
     cv2.imshow("Image", img)
     k = cv2.waitKey(1)
-    
+
     if k%256 == 27:
         break
     elif k%256 == 32:
@@ -111,7 +109,8 @@ while True:
         print(text)
 
         show_result(img, text)
-        cv2.imshow("Image", img)
-        
+        k = cv2.waitKey(1)
+        sleep(5)
+
         break
 
