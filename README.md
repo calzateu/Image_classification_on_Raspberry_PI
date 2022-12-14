@@ -37,3 +37,12 @@ Uso el siguiente comando debido a la poca memoria que tiene la Raspberry, entonc
 pip --no-cache-dir install tensorflow
 ```
 
+Antes de instalar OpenCV instalo una dependencia que no tenía
+```
+sudo apt-get install libgl1
+```
+
+Después instalo OpenCV para capturar las imágenes de la cámara
+```
+pip --no-cache-dir install opencv-python
+```
