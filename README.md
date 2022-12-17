@@ -12,17 +12,12 @@ source myprojectenv/bin/activate
 ```
 
 ### Instalando librerias de Python
-Uso el siguiente comando debido a la poca memoria que tiene la Raspberry, entonces no quiero cache
-```
-pip --no-cache-dir install tensorflow
-```
-
 Antes de instalar OpenCV instalo una dependencia que no tenía
 ```
 sudo apt-get install libgl1
 ```
 
-Después instalo OpenCV para capturar las imágenes de la cámara
+Para instalar opencv uso el siguiente comando debido a la poca memoria que tiene la Raspberry, entonces no quiero cache.
 ```
 pip --no-cache-dir install opencv-python
 ```
